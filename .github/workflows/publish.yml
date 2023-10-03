@@ -6,7 +6,7 @@
 # separate terms of service, privacy policy, and support
 # documentation.
 
-name: PYPI Uploader
+name: python_package_uploader
 
 on:
   release:
