@@ -25,6 +25,9 @@ SOFTWARE.
 # Imports
 from datetime import datetime
 
+# Version
+__version__ = "0.0.4"
+
 
 # Colour class
 class Colour:
