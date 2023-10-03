@@ -23,17 +23,11 @@ SOFTWARE.
 """JSPrint - A JavaScript way of printing to the console."""
 
 # Imports
-from datetime import datetime  # Built-in
-
-# Version
-__version__ = "0.0.3"
+from datetime import datetime
 
 
-# Colours
+# Colour class
 class Colour:
-    def __init__(self):
-        pass
-
     white = "\033[0m"
     red = "\033[31m"
     green = "\033[32m"
@@ -44,11 +38,8 @@ class Colour:
     grey = "\033[37m"
 
 
-# Styles
+# Styles class
 class Styles:
-    def __init__(self):
-        pass
-
     default = "\033[0m"
     bold = "\033[1m"
     underline = "\033[4m"
@@ -56,51 +47,153 @@ class Styles:
     reset = "\033[0m"
 
 
-# Extra
-class Extra:
-    def __init__(self):
-        pass
-
+# Utils class
+class Utils:
     @staticmethod
     def date():
         return f"{Colour.grey}[{datetime.now().strftime('%d/%m/%Y %H:%M:%S')}]{Styles.reset}"
 
+    default = ["log", "warn", "error", "info", "success", "debug", "trace"]
 
+
+# JSPrint class
 class JSP:
-    def __init__(self):
-        pass
+    def __init__(self, log_level: str = "log"):
+        # Set log level
+        self.log_level = log_level
+        self.levels = ["log", "warn", "error", "info", "success", "debug", "trace"]
+
+        # Enable all logging levels below the user input
+        if log_level == "warn":
+            self.levels = ["warn", "error", "info", "success", "debug", "trace"]
+        elif log_level == "error":
+            self.levels = ["error", "info", "success", "debug", "trace"]
+        elif log_level == "info":
+            self.levels = ["info", "success", "debug", "trace"]
+        elif log_level == "success":
+            self.levels = ["success", "debug", "trace"]
+        elif log_level == "debug":
+            self.levels = ["debug", "trace"]
+        elif log_level == "trace":
+            self.levels = ["trace"]
+
+    def set_log_level(self, log_level: str):
+        """
+        Sets the log level.
+
+        Args:
+            log_level (str): The log level to set.
+        """
+        self.log_level = log_level
+
+        # Enable all logging levels below the user input
+        if log_level == "warn":
+            self.levels = ["warn", "error", "info", "success", "debug", "trace"]
+        elif log_level == "error":
+            self.levels = ["error", "info", "success", "debug", "trace"]
+        elif log_level == "info":
+            self.levels = ["info", "success", "debug", "trace"]
+        elif log_level == "success":
+            self.levels = ["success", "debug", "trace"]
+        elif log_level == "debug":
+            self.levels = ["debug", "trace"]
+        elif log_level == "trace":
+            self.levels = ["trace"]
 
     def log(self, message: str):
-        print(
-            f"{Extra.date()} {Colour.blue}[LOG]{Colour.white} {message}{Styles.reset}"
-        )
+        """
+        Logs a message with the [LOG] level.
+
+        Args:
+            message (str): The message to be logged.
+        """
+        if "log" in self.levels and self.levels.index("log") >= self.levels.index(
+            self.log_level
+        ):
+            print(
+                f"{Utils.date()} {Colour.blue}[LOG]{Colour.white} {message}{Styles.reset}"
+            )
 
     def warn(self, message: str):
-        print(
-            f"{Extra.date()} {Colour.yellow}[WARN]{Colour.white} {message}{Styles.reset}"
-        )
+        """
+        Logs a message with the [WARN] level.
+
+        Args:
+            message (str): The message to be logged.
+        """
+        if "warn" in self.levels and self.levels.index("warn") >= self.levels.index(
+            self.log_level
+        ):
+            print(
+                f"{Utils.date()} {Colour.yellow}[WARN]{Colour.white} {message}{Styles.reset}"
+            )
 
     def error(self, message: str):
-        print(
-            f"{Extra.date()} {Colour.red}[ERROR]{Colour.white} {message}{Styles.reset}"
-        )
+        """
+        Logs a message with the [ERROR] level.
+
+        Args:
+            message (str): The message to be logged.
+        """
+        if "error" in self.levels and self.levels.index("error") >= self.levels.index(
+            self.log_level
+        ):
+            print(
+                f"{Utils.date()} {Colour.red}[ERROR]{Colour.white} {message}{Styles.reset}"
+            )
 
     def info(self, message: str):
-        print(
-            f"{Extra.date()} {Colour.blue}[INFO]{Colour.white} {message}{Styles.reset}"
-        )
+        """
+        Logs a message with the [INFO] level.
+
+        Args:
+            message (str): The message to be logged.
+        """
+        if "info" in self.levels and self.levels.index("info") >= self.levels.index(
+            self.log_level
+        ):
+            print(
+                f"{Utils.date()} {Colour.cyan}[INFO]{Colour.white} {message}{Styles.reset}"
+            )
 
     def success(self, message: str):
-        print(
-            f"{Extra.date()} {Colour.green}[SUCCESS]{Colour.white} {message}{Styles.reset}"
-        )
+        """
+        Logs a message with the [SUCCESS] level.
+
+        Args:
+            message (str): The message to be logged.
+        """
+        if "success" in self.levels and self.levels.index(
+            "success"
+        ) >= self.levels.index(self.log_level):
+            print(
+                f"{Utils.date()} {Colour.green}[SUCCESS]{Colour.white} {message}{Styles.reset}"
+            )
 
     def debug(self, message: str):
-        print(
-            f"{Extra.date()} {Colour.purple}[DEBUG]{Colour.white} {message}{Styles.reset}"
-        )
+        """
+        Logs a message with the [DEBUG] level.
+
+        Args:
+            message (str): The message to be logged.
+        """
+        if "debug" in self.levels and self.levels.index("debug") >= self.levels.index(
+            self.log_level
+        ):
+            print(
+                f"{Utils.date()} {Colour.purple}[DEBUG]{Colour.white} {message}{Styles.reset}"
+            )
 
     def trace(self, message: str):
-        print(
-            f"{Extra.date()} {Colour.grey}[TRACE]{Colour.white} {message}{Styles.reset}"
-        )
+        """
+        Logs a message with the [TRACE] level.
+
+        Args:
+            message (str): The message to be logged.
+        """
+        if "trace" in self.levels and self.levels.index("trace") >= self.levels.index(
+            self.log_level
+        ):
+            print(
+                f"{Utils.date()} {Colour.grey}[TRACE]{Colour.white} {message}{Styles.reset}"
+            )
