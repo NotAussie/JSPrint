@@ -55,7 +55,6 @@ logger.trace("This is a trace message")
 
 # Edit the log level
 set_log_level("warn")
-
 ```
 
 ### 
