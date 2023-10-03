@@ -62,7 +62,7 @@ set_log_level("warn")
 
 # 📝 • Documentation
 ### JSPrint documentation is still in it's early stages.
-View the documentation [here]
+View the documentation [here](https://github.com/NotAussie/JSPrint/blob/main/Docs/docs.md#jsprint)
 
 ### 
 
